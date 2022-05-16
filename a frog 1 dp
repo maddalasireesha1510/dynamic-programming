@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+using namespace std;
+int f(int ind,int n,int arr[],vector<int>&dp)
+{
+    if(ind>=n-1)return 0;
+    if(dp[ind]!=-1)return dp[ind];
+    int l=abs(arr[ind]-arr[ind+1])+f(ind+1,n,arr,dp);
+    int r=INT_MAX;
+    if(ind+2<n)
+    {
+        r=abs(arr[ind]-arr[ind+2])+f(ind+2,n,arr,dp);
+    }
+    return dp[ind]=min(l,r);
+   
+}
+int main()
+{
+    int n;
+    cin>>n;
+    int arr[n];
+    vector<int>dp(n,-1);
+    for(int i=0;i<n;i++)
+    {
+        cin>>arr[i];
+    }
+    cout<<f(0,n,arr,dp);
+}
